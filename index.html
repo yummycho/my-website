@@ -3,62 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Trace</title>
-  <!-- PayPal SDK -->
+  <title>Global Custom Solutions</title>
+  <!-- 新增字体和图标库 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <script src="https://www.paypal.com/sdk/js?client-id=你的PayPal账号ID&currency=USD"></script>
   <style>
-    /* 基础样式 */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+    :root {
+      --primary: #e3f2fd;  /* 主淡蓝色 */
+      --secondary: #1976d2; /* 强调深蓝色 */
+      --accent: #ffab40;   /* 点缀橙色 */
     }
-    
-    /* 导航栏样式 */
+
+    /* 动态网格背景 */
+    body {
+      background: 
+        linear-gradient(var(--primary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+      background-size: 30px 30px;
+      min-height: 100vh;
+    }
+
+    /* 流线型导航 */
     nav {
-      background: #2c3e50;
-      padding: 1rem;
-      color: white;
+      background: rgba(255,255,255,0.95);
+      padding: 1rem 5%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    
-    /* 产品展示区 */
+    .logo {
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      color: var(--secondary);
+      font-size: 2rem;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: skewX(-10deg);
+    }
+
+    /* 智能搜索栏 */
+    .search-bar {
+      max-width: 800px;
+      margin: 2rem auto;
+      display: flex;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(25,118,210,0.2);
+    }
+    .search-input {
+      flex: 1;
+      padding: 1rem 2rem;
+      border: none;
+      font-size: 1.1rem;
+    }
+    .search-btn {
+      background: var(--secondary);
+      color: white;
+      padding: 0 2rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-btn:hover {
+      background: #1565c0;
+    }
+
+    /* 高级产品卡片 */
     .products {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      padding: 2rem;
+      padding: 2rem 5%;
+    }
+    .product-item {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .product-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+    .product-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--primary);
+    }
+    .product-info {
+      padding: 1.5rem;
+    }
+    .product-specs {
+      display: flex;
+      gap: 10px;
+      margin: 1rem 0;
+    }
+    .spec-btn {
+      background: var(--primary);
+      border: none;
+      padding: 5px 15px;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    /* 浮动客服 */
+    .chat-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--secondary);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(25,118,210,0.3);
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
   <nav>
-    <h1>Global Trace</h1>
+    <a href="#" class="logo">GCSolutions</a>
   </nav>
-  
+
+  <!-- 新增搜索功能 -->
+  <div class="search-bar">
+    <input type="text" class="search-input" placeholder="搜索产品 (如: 定制机械零件)">
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+  </div>
+
   <div class="products">
-    <!-- 在此插入产品图片和描述 -->
+    <!-- 产品卡片1 -->
     <div class="product-item">
-      <img src="images/product1.jpg" alt="产品1" width="300">
-      <h3>定制产品1</h3>
-      <p>价格：$99.99</p>
-      <div id="paypal-button-container-1"></div>
+      <div class="product-badge">热卖推荐</div>
+      <img src="images/product1.jpg" alt="精密零件" class="product-img">
+      <div class="product-info">
+        <h3>精密机械零件</h3>
+        <div class="product-specs">
+          <button class="spec-btn">304不锈钢</button>
+          <button class="spec-btn">尺寸定制</button>
+        </div>
+        <p>起订量：500件</p>
+        <p style="color:var(--secondary); font-size:1.2rem;">$89.99</p>
+        <div id="paypal-button-container-1" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- 产品卡片2 -->
+    <div class="product-item">
+      <div class="product-badge">新品上市</div>
+      <img src="images/product2.jpg" alt="电子元件" class="product-img">
+      <div class="product-info">
+        <h3>工业电子元件</h3>
+        <div class="product-specs">
+          <button class="spec-btn">IP67防水</button>
+          <button class="spec-btn">电压定制</button>
+        </div>
+        <p>起订量：200件</p>
+        <p style="color:var(--secondary); font-size:1.2rem;">$149.99</p>
+        <div id="paypal-button-container-2" style="margin-top:1rem;"></div>
+      </div>
     </div>
   </div>
 
-  <!-- PayPal支付按钮脚本 -->
+  <!-- 浮动客服按钮 -->
+  <div class="chat-btn">
+    <i class="fas fa-comments fa-2x"></i>
+  </div>
+
+  <!-- 增强版支付脚本 -->
   <script>
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
+    // PayPal支付集成
+    [1, 2].forEach(id => {
+      paypal.Buttons({
+        style: {
+          color: 'gold',
+          shape: 'rect',
+          label: 'checkout'
+        },
+        createOrder: (data, actions) => actions.order.create({
           purchase_units: [{
             amount: {
-              value: '99.99'
+              value: document.querySelector(`#paypal-button-container-${id}`)
+                .previousElementSibling.textContent.replace('$','')
             }
           }]
-        });
-      }
-    }).render('#paypal-button-container-1');
+        })
+      }).render(`#paypal-button-container-${id}`);
+    });
+
+    // 简单客服交互
+    document.querySelector('.chat-btn').addEventListener('click', () => {
+      window.open('mailto:contact@yourcompany.com?subject=产品咨询');
+    });
   </script>
 </body>
 </html>
